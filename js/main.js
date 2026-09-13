@@ -113,7 +113,7 @@
   function runCounter(el) {
     var target = parseInt(el.getAttribute('data-count'), 10) || 0;
     if (reduceMotion.matches) {
-      el.textContent = target.toLocaleString('en-GB');
+      el.textContent = target.toLocaleString('en-US');
       return;
     }
     var dur = 900;
@@ -122,7 +122,7 @@
       if (start === null) start = ts;
       var t = Math.min(1, (ts - start) / dur);
       var eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
-      el.textContent = Math.round(target * eased).toLocaleString('en-GB');
+      el.textContent = Math.round(target * eased).toLocaleString('en-US');
       if (t < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
@@ -140,7 +140,7 @@
   } else {
     Array.prototype.forEach.call(counters, function (el) {
       el.textContent =
-        (parseInt(el.getAttribute('data-count'), 10) || 0).toLocaleString('en-GB');
+        (parseInt(el.getAttribute('data-count'), 10) || 0).toLocaleString('en-US');
     });
   }
 
