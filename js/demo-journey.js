@@ -321,12 +321,8 @@
       return;
     }
     var act = t.getAttribute('data-tf');
-    if (act === 'claim') {
-      window.open(STRIPE_CLAIM, '_blank', 'noopener');
-      return;
-    }
-    if (act === 'hosting') {
-      window.open(STRIPE_HOSTING, '_blank', 'noopener');
+    if (act === 'claim' || act === 'hosting') {
+      /* real <a href> handles navigation; allow default */
       return;
     }
     if (act === 'change') { openChangeModal(); return; }
