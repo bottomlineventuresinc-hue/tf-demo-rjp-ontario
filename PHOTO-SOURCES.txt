@@ -1,0 +1,74 @@
+PHOTO SOURCES — RJP General Contracting (hs-006-rjp)
+Commercial-ok Unsplash / Pexels / local library downloads. Quality pass 2026-09-13.
+No invented CSLB / license numbers on site.
+
+hero-site.jpg
+  Source: Unsplash
+  URL: https://unsplash.com/photos/photo-1484154218962-a197022b5858
+  Direct: https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=2400&q=80
+  Use: Hero finished kitchen remodel (replaced commercial rebar site)
+
+job041-after.jpg
+  Source: Unsplash (Copperline library set, retained)
+  URL: https://unsplash.com/photos/photo-1556912173-3bb406ef7e77
+  Use: Kitchen after
+
+job041-before.jpg
+  Source: Unsplash (Copperline library set, retained)
+  URL: https://unsplash.com/photos/photo-1618832515490-e181c4794a45
+  Use: Kitchen protected mid-works
+
+job038-after.jpg
+  Source: Unsplash
+  URL: https://unsplash.com/photos/photo-1600210492493-0946911123ea
+  Direct: https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=2400&q=80
+  Use: Room addition living space after (replaced loft/attic)
+
+job038-before.jpg
+  Source: Pexels
+  URL: https://www.pexels.com/photo/3990359/
+  Direct: https://images.pexels.com/photos/3990359/pexels-photo-3990359.jpeg?auto=compress&cs=tinysrgb&w=2400
+  Use: Addition / remodel before (drywall + studs)
+
+job052-after.jpg
+  Source: Unsplash (Copperline library set, retained)
+  URL: https://unsplash.com/photos/photo-1584622650111-993a426fbf0a
+  Use: Bathroom after
+
+job052-before.jpg
+  Source: Unsplash (Copperline library set, retained)
+  URL: https://unsplash.com/photos/photo-1517581177682-a085bb7ffb15
+  Use: Bathroom / structural strip-out before
+
+services-extension.jpg
+  Source: Local library (calder-yard-v2 framing.jpg)
+  Origin: residential wood framing stock used in Calder Yard v2
+  Use: Services / additions framing (replaced UK block addition)
+
+people-crew.jpg
+  Source: Pexels
+  URL: https://www.pexels.com/photo/6474471/
+  Direct: https://images.pexels.com/photos/6474471/pexels-photo-6474471.jpeg?auto=compress&cs=tinysrgb&w=2400
+  Use: Crew finishing during residential remodel
+
+people-marek.jpg (Robert portrait stand-in)
+  Source: Pexels
+  URL: https://www.pexels.com/photo/6474475/
+  Direct: https://images.pexels.com/photos/6474475/pexels-photo-6474475.jpeg?auto=compress&cs=tinysrgb&w=1600
+  Use: Site lead portrait on remodel site (replaced commercial Euro lift shot)
+
+people-tom.jpg
+  Source: Unsplash
+  URL: https://unsplash.com/photos/photo-1621905252507-b35492cc74b4
+  Direct: https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1600&q=80
+  Use: On-site trades (replaced shirt with PLUMBING logo)
+
+coverage-house.jpg
+  Source: Pexels
+  URL: https://www.pexels.com/photo/106399/
+  Direct: https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=2400
+  Use: IE-style suburban home for coverage (replaced UK semi-detached)
+
+logo.svg / logo-dark.svg
+  Created for RJP General Contracting (premium copper wordmark + house mark)
+  No real client logo on file.

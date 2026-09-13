@@ -118,9 +118,14 @@ em{font-style:normal;color:var(--copper)}
 }
 .site-head__row{
   display:flex;align-items:center;gap:var(--s6);
-  padding-block:var(--s4);
+  padding-block:var(--s3);
 }
 .brand{display:flex;align-items:center;gap:var(--s3);text-decoration:none}
+.brand__logo{
+  display:block;height:40px;width:auto;max-width:min(200px,52vw);
+}
+.brand__logo--foot{height:36px;max-width:180px}
+.brand--foot{margin-bottom:var(--s3)}
 .brand__mark{
   width:var(--s6);height:var(--s6);flex:none;
   background:
@@ -152,7 +157,7 @@ em{font-style:normal;color:var(--copper)}
   display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);
   gap:var(--s8);align-items:end;
 }
-.hero__copy{display:grid;gap:var(--s5);padding-bottom:var(--s8)}
+.hero__copy{display:grid;gap:var(--s4);padding-bottom:var(--s7)}
 .lede{font-size:var(--t-md);color:var(--muted-on-dark);max-width:56ch}
 .hero__actions{display:flex;gap:var(--s4);flex-wrap:wrap}
 .hero__facts{
@@ -219,9 +224,9 @@ em{font-style:normal;color:var(--copper)}
 /* =========================================================
    SECTION SCAFFOLD
    ========================================================= */
-section{padding-block:var(--s9)}
-.sec-head{display:grid;gap:var(--s4);margin-bottom:var(--s7)}
-.sec-head__note{color:var(--muted);max-width:60ch}
+section{padding-block:clamp(4.5rem, 6vw, 5.5rem)}
+.sec-head{display:grid;gap:var(--s3);margin-bottom:var(--s6)}
+.sec-head__note{color:var(--muted);max-width:58ch;line-height:1.55}
 
 /* scroll reveals */
 [data-reveal]{opacity:0;transform:translateY(24px);
@@ -525,9 +530,15 @@ section{padding-block:var(--s9)}
   border-top:var(--rule) solid var(--copper);
   padding-block:var(--s7);
 }
-.site-foot__row{display:grid;gap:var(--s3);font-size:var(--t-sm)}
+.site-foot__row{display:grid;gap:var(--s4);font-size:var(--t-sm);justify-items:start}
 .site-foot strong{color:var(--ink-on-dark)}
 .site-foot .mono{font-size:var(--t-xs);letter-spacing:0.14em;color:var(--copper)}
+.site-foot a.mono{color:var(--ink-on-dark);text-decoration:none}
+.site-foot a.mono:hover{color:var(--copper)}
+@media (min-width:800px){
+  .site-foot__row{grid-template-columns:auto 1fr;align-items:start;column-gap:var(--s7)}
+  .site-foot__row .brand--foot{grid-row:1 / span 4}
+}
 
 /* =========================================================
    STICKY QUOTE BAR
@@ -602,4 +613,20 @@ section{padding-block:var(--s9)}
   .plumb__swing{animation:none}
   .house__stroke{stroke-dashoffset:0;transition:none}
   .quotebar{transition:none}
+}
+
+
+/* =========================================================
+   Premium photo treatment (RJP quality pass)
+   ========================================================= */
+.hero__media img,
+.ba__frame img,
+.services__media img,
+.people__grid img,
+.coverage__media img{
+  object-fit:cover;
+  filter:saturate(0.96) contrast(1.02);
+}
+.ba__frame{
+  box-shadow:0 12px 40px rgba(35,33,32,0.12);
 }
