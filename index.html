@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/demo-journey.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -43,7 +44,7 @@
 }
 </script>
 </head>
-<body class="has-claimbar">
+<body>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-head" id="top">
@@ -76,6 +77,7 @@
           <a class="btn btn--copper" href="#quote">Get a quote</a>
           <a class="btn btn--ghost" href="tel:+19092409990">Call Robert</a>
         </div>
+        <p class="tf-updated-chip" id="tf-updated-chip" aria-hidden="true">Updated just now</p>
         <dl class="hero__facts boot boot-5">
           <div class="fact"><dt>Quote held for</dt><dd class="mono"><span data-count="60">0</span> days</dd></div>
           <div class="fact"><dt>Guarantee</dt><dd class="mono"><span data-count="12">0</span> months</dd></div>
@@ -481,51 +483,248 @@
   </div>
 </footer>
 
-<!-- Template Factory claim/change overlay (demo preview) -->
-<div class="claimbar" data-claimbar role="region" aria-label="Draft preview actions">
-  <div class="wrap claimbar__row">
-    <div class="claimbar__left">
-      <p class="claimbar__line">Draft preview for <strong>RJP General Contracting</strong> · not live yet</p>
-      <div class="claimbar__meta">
-        <button type="button" class="claimbar__link" data-billing-toggle aria-expanded="false">How billing works</button>
-        <p class="claimbar__billing" data-billing-panel hidden>$297 setup, then $99/mo to keep it live. Pay = on. Don't pay = paused.</p>
-      </div>
+
+
+<!-- ===== Template Factory demo journey (client-side only) ===== -->
+<div class="tf-bar" id="tf-bar" role="region" aria-label="Draft claim and changes">
+  <div class="tf-bar__inner">
+    <div class="tf-bar__meta">
+      <p class="tf-bar__label">Draft · RJP General Contracting</p>
+      <p class="tf-bar__sub" id="tf-bar-sub">Draft for Robert at RJP. Claim it, preview the rest of the journey, or request a change.</p>
     </div>
-    <div class="claimbar__actions">
-      <a class="btn btn--copper btn--small" href="https://buy.stripe.com/cNieVdg1peCq9subRr1gs02" target="_blank" rel="noopener noreferrer">Claim this site · $297</a>
-      <button type="button" class="btn btn--ghost btn--small claimbar__change" data-change-open>Request a change</button>
+    <div class="tf-bar__actions">
+      <button type="button" class="btn btn--copper" data-tf="claim">Claim this site · $297</button>
+      <button type="button" class="btn btn--ghost" data-tf="change">Request a change</button>
+      <button type="button" class="btn btn--ghost" data-tf="journey">Preview rest of journey (demo)</button>
+      <button type="button" class="btn btn--linkish" data-tf="simulate">I paid / simulate purchase</button>
     </div>
   </div>
 </div>
 
-<dialog class="change-modal" data-change-modal aria-labelledby="change-modal-title">
-  <form class="change-modal__form" data-change-form method="dialog">
-    <header class="change-modal__head">
-      <h2 id="change-modal-title">Request a change</h2>
-      <p class="change-modal__note">Tell us what to fix. We'll text Robert a fresh link when it's ready.</p>
-      <button type="button" class="change-modal__close" data-change-close aria-label="Close">×</button>
-    </header>
-    <div class="field">
-      <label for="change-name">Your name <span class="opt">(optional)</span></label>
-      <input id="change-name" name="name" type="text" autocomplete="name">
+<button type="button" class="tf-outreach-fab" id="tf-outreach-fab" data-tf="outreach">See SMS / email journey</button>
+
+<div class="tf-spin" id="tf-spin" hidden role="status" aria-live="polite">
+  <div class="tf-spin__card">
+    <div class="tf-spin__ring" aria-hidden="true"></div>
+    <p class="tf-spin__title" id="tf-spin-title">Working on updates to your site…</p>
+    <p class="tf-spin__line" id="tf-spin-line">Updating the draft for RJP. Hang tight.</p>
+  </div>
+</div>
+
+<div class="tf-modal" id="tf-change-modal" hidden role="dialog" aria-modal="true" aria-labelledby="tf-change-title">
+  <div class="tf-modal__panel">
+    <div class="tf-modal__head">
+      <div>
+        <p class="tf-modal__kicker">Change request</p>
+        <h2 id="tf-change-title">What should we update?</h2>
+      </div>
+      <button type="button" class="tf-modal__close" data-tf="close-change" aria-label="Close">&times;</button>
     </div>
-    <div class="field">
-      <label for="change-email">Email <span class="opt">(optional)</span></label>
-      <input id="change-email" name="email" type="email" autocomplete="email">
+    <p class="tf-note">This is a live demo. Your note is saved in this browser only. We will simulate an update on the draft so you can see the change land.</p>
+    <form id="tf-change-form">
+      <div class="tf-field">
+        <label for="tf-change-msg">Your message <span aria-hidden="true">*</span></label>
+        <textarea id="tf-change-msg" name="message" required placeholder="e.g. Soften the hero line and mention kitchen remodels first."></textarea>
+      </div>
+      <p class="tf-err" id="tf-change-err" role="alert"></p>
+      <div class="tf-modal__actions">
+        <button type="submit" class="btn btn--copper">Submit change</button>
+        <button type="button" class="btn btn--ghost" data-tf="close-change">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="tf-modal" id="tf-journey-modal" hidden role="dialog" aria-modal="true" aria-labelledby="tf-journey-title">
+  <div class="tf-modal__panel tf-modal__panel--wide">
+    <div class="tf-modal__head">
+      <div>
+        <p class="tf-modal__kicker">Post-purchase journey · demo</p>
+        <h2 id="tf-journey-title">Get RJP live</h2>
+      </div>
+      <button type="button" class="tf-modal__close" data-tf="close-journey" aria-label="Close">&times;</button>
     </div>
-    <div class="field">
-      <label for="change-message">What should we change? <span aria-hidden="true">*</span></label>
-      <textarea id="change-message" name="message" rows="4" required placeholder="e.g. Swap the hero photo, fix the phone number, add Fontana to coverage"></textarea>
+
+    <div class="tf-step" data-step="pay">
+      <p class="tf-note"><strong>Payment confirmed (demo).</strong> Setup fee $297 noted. Hosting is $99/mo after go-live. No real charge was made on this path.</p>
+      <div class="tf-step__actions">
+        <button type="button" class="btn btn--copper" data-tf="journey-next-onboard">Continue to onboarding</button>
+        <button type="button" class="btn btn--ghost" data-tf="close-journey">Close</button>
+      </div>
     </div>
-    <div class="change-modal__actions">
-      <button class="btn btn--copper" type="submit">Send request</button>
-      <button class="btn btn--ghost" type="button" data-change-close>Cancel</button>
+
+    <div class="tf-step" data-step="onboard" hidden>
+      <form id="tf-onboard-form">
+        <div class="tf-choice">
+          <p><strong>Do you have a website today?</strong></p>
+          <div class="tf-choice__btns">
+            <button type="button" class="btn btn--ghost" data-tf="has-site-yes">Yes</button>
+            <button type="button" class="btn btn--ghost" data-tf="has-site-no">No</button>
+          </div>
+        </div>
+
+        <div class="tf-path" id="tf-path-a" hidden>
+          <p class="tf-note">Path A · invite-first. We will ask your registrar to point the domain after you approve the invite.</p>
+          <div class="tf-field">
+            <label for="tf-current-url">Current website URL</label>
+            <input id="tf-current-url" type="text" placeholder="https://yoursite.com" autocomplete="url">
+          </div>
+          <div class="tf-field">
+            <label for="tf-registrar-a">Registrar</label>
+            <input id="tf-registrar-a" type="text" placeholder="GoDaddy, Namecheap, Google Domains…">
+          </div>
+        </div>
+
+        <div class="tf-path" id="tf-path-no-site" hidden>
+          <p><strong>Do you already own a domain?</strong></p>
+          <div class="tf-choice__btns">
+            <button type="button" class="btn btn--ghost" data-tf="domain-yes">Yes, I have one</button>
+            <button type="button" class="btn btn--ghost" data-tf="domain-no">Not yet</button>
+          </div>
+        </div>
+
+        <div class="tf-path" id="tf-path-b" hidden>
+          <p class="tf-note">Path B · you have a domain. We connect it after setup.</p>
+          <div class="tf-field">
+            <label for="tf-domain-b">Domain</label>
+            <input id="tf-domain-b" type="text" placeholder="rjpcontracting.com">
+          </div>
+          <div class="tf-field">
+            <label for="tf-registrar-b">Registrar</label>
+            <input id="tf-registrar-b" type="text" placeholder="Where you bought it">
+          </div>
+        </div>
+
+        <div class="tf-path" id="tf-path-c" hidden>
+          <p class="tf-note">Path C · three name ideas. We show a shortlist at cost (~$14/yr). Demo list only.</p>
+          <div class="tf-field">
+            <label for="tf-idea-1">Name idea 1</label>
+            <input id="tf-idea-1" type="text" placeholder="RJP Contracting">
+          </div>
+          <div class="tf-field">
+            <label for="tf-idea-2">Name idea 2</label>
+            <input id="tf-idea-2" type="text" placeholder="RJP Remodels Ontario">
+          </div>
+          <div class="tf-field">
+            <label for="tf-idea-3">Name idea 3</label>
+            <input id="tf-idea-3" type="text" placeholder="Robert Perez GC">
+          </div>
+          <p class="tf-note" style="margin-top:0.5rem"><strong>Shortlist (demo)</strong></p>
+          <div class="tf-domain-list">
+            <button type="button" class="tf-domain" data-tf="pick-domain" data-domain="rjpcontracting.com">
+              <strong>rjpcontracting.com</strong><span>~ $14/yr</span>
+            </button>
+            <button type="button" class="tf-domain" data-tf="pick-domain" data-domain="rjpremodels.com">
+              <strong>rjpremodels.com</strong><span>~ $14/yr</span>
+            </button>
+            <button type="button" class="tf-domain" data-tf="pick-domain" data-domain="rjpontario.com">
+              <strong>rjpontario.com</strong><span>~ $14/yr</span>
+            </button>
+          </div>
+          <input type="hidden" id="tf-domain-picked" value="">
+        </div>
+
+        <div class="tf-field">
+          <label for="tf-bill-email">Billing email</label>
+          <input id="tf-bill-email" type="email" autocomplete="email" placeholder="robert@example.com">
+        </div>
+        <div class="tf-field">
+          <label for="tf-bill-phone">Phone for setup texts</label>
+          <input id="tf-bill-phone" type="tel" autocomplete="tel" placeholder="909-240-9990">
+        </div>
+        <div class="tf-checks">
+          <label class="tf-check">
+            <input type="checkbox" id="tf-utility">
+            <span>Utility note: pay hosting on time and the site stays live. Miss payment and we suspend until it is current.</span>
+          </label>
+          <label class="tf-check">
+            <input type="checkbox" id="tf-terms">
+            <span>I acknowledge the setup and hosting terms for this demo.</span>
+          </label>
+        </div>
+        <p class="tf-err" id="tf-onboard-err" role="alert"></p>
+        <div class="tf-step__actions">
+          <button type="button" class="btn btn--copper" data-tf="onboard-continue">Continue to deploy</button>
+        </div>
+      </form>
     </div>
-    <p class="change-modal__thanks mono" data-change-thanks hidden role="status" aria-live="polite">Got it. We'll text Robert a fresh link when it's ready.</p>
-  </form>
-</dialog>
+
+    <div class="tf-step" data-step="deploy" hidden>
+      <p class="tf-spin__title" style="text-align:left">Getting your site live…</p>
+      <p class="tf-note">DNS, SSL, and NAP checks. This is a demo checklist.</p>
+      <ul class="tf-checklist" id="tf-deploy-list">
+        <li>DNS pointed</li>
+        <li>SSL certificate active</li>
+        <li>NAP verify (name, address, phone)</li>
+      </ul>
+    </div>
+
+    <div class="tf-step" data-step="success" hidden>
+      <p><strong>Your site is live.</strong></p>
+      <p class="tf-note">Live URL (this draft):</p>
+      <p class="tf-success-url"><a href="https://bottomlineventuresinc-hue.github.io/tf-demo-rjp-ontario/" target="_blank" rel="noopener">https://bottomlineventuresinc-hue.github.io/tf-demo-rjp-ontario/</a></p>
+
+      <p class="tf-note" style="margin-top:0.5rem"><strong>Sample messages Robert would get</strong> (shown only, not sent):</p>
+      <div class="tf-bubbles">
+        <div class="tf-bubble tf-bubble--sms">
+          <p class="tf-bubble__meta">SMS · just now</p>
+          <p>Robert, your RJP site is live: https://bottomlineventuresinc-hue.github.io/tf-demo-rjp-ontario/ · Reply if anything looks off. Hosting is $99/mo starting next cycle.</p>
+        </div>
+        <div class="tf-bubble tf-bubble--email">
+          <p class="tf-bubble__meta">Email · just now</p>
+          <p>Subject: RJP General Contracting is live<br><br>Hi Robert, your site is up. Bookmark the link above. If you need a tweak, reply to this email or use Request a change on the draft. Hosting keeps DNS, SSL, and hosting warm at $99/mo.</p>
+        </div>
+      </div>
+
+      <div class="tf-step__actions" style="margin-top:0.5rem">
+        <button type="button" class="btn btn--copper" data-tf="hosting">Start hosting · $99/mo</button>
+        <button type="button" class="btn btn--ghost" data-tf="journey-done">Done</button>
+      </div>
+
+      <details class="tf-details">
+        <summary>What if they don't pay?</summary>
+        <p>Sample suspend park notice (not sent): “Hi Robert, hosting for RJP is past due. The site is on a temporary park page until payment clears. Pay here to restore: [hosting link]. Call us if you need a day or two.”</p>
+      </details>
+    </div>
+  </div>
+</div>
+
+<div class="tf-modal" id="tf-outreach-modal" hidden role="dialog" aria-modal="true" aria-labelledby="tf-outreach-title">
+  <div class="tf-modal__panel tf-modal__panel--wide">
+    <div class="tf-modal__head">
+      <div>
+        <p class="tf-modal__kicker">Sample outreach · demo</p>
+        <h2 id="tf-outreach-title">SMS journey for Robert</h2>
+      </div>
+      <button type="button" class="tf-modal__close" data-tf="close-outreach" aria-label="Close">&times;</button>
+    </div>
+    <p class="tf-note">Human sequence from first touch to soft claim. Filled for RJP / Robert / Ontario. Nothing is sent for real.</p>
+    <div class="tf-bubbles">
+      <div class="tf-bubble tf-bubble--sms">
+        <p class="tf-bubble__meta">1 · First touch</p>
+        <p>Hi Robert, this is Maria with Bottom Line Ventures. I put together a simple site draft for RJP General Contracting in Ontario. Mind if I text you the preview?</p>
+      </div>
+      <div class="tf-bubble tf-bubble--sms">
+        <p class="tf-bubble__meta">2 · Preview</p>
+        <p>Here you go: https://bottomlineventuresinc-hue.github.io/tf-demo-rjp-ontario/ · Kitchen, bath, and additions, priced in writing. Tell me what to change and I will update the draft.</p>
+      </div>
+      <div class="tf-bubble tf-bubble--sms">
+        <p class="tf-bubble__meta">3 · Soft claim</p>
+        <p>If the draft feels right, you can claim the site for $297 setup. Hosting is $99/mo after. Happy to walk you through it on a quick call.</p>
+      </div>
+      <div class="tf-bubble tf-bubble--sms">
+        <p class="tf-bubble__meta">4 · Bump</p>
+        <p>Robert, just bumping the RJP preview in case it got buried. Still happy to tweak copy or photos. Link again: https://bottomlineventuresinc-hue.github.io/tf-demo-rjp-ontario/</p>
+      </div>
+    </div>
+    <div class="tf-modal__actions">
+      <button type="button" class="btn btn--ghost" data-tf="close-outreach">Close</button>
+    </div>
+  </div>
+</div>
 
 <script src="js/main.js"></script>
-<script src="js/claim-overlay.js"></script>
+<script src="js/demo-journey.js"></script>
+
 </body>
 </html>

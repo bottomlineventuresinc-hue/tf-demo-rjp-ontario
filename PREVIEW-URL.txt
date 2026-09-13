@@ -1,0 +1,15 @@
+https://bottomlineventuresinc-hue.github.io/tf-demo-rjp-ontario/
+
+Host: GitHub Pages (public)
+Repo: https://github.com/bottomlineventuresinc-hue/tf-demo-rjp-ontario
+Local build: /workspace/xhtml-templates/template-factory/builds/hs-006-rjp/
+
+Click path for Maria (full journey):
+1. Open the live URL. Sticky bottom bar: Draft · RJP.
+2. Request a change → type a note → Submit. Spinner (~3s) then hero/services visibly update; bar returns "Draft updated…"
+3. Claim this site · $297 opens real Stripe (new tab). Optional.
+4. Preview rest of journey (demo) OR "I paid / simulate purchase" → post-pay flow without charging.
+5. Onboarding paths A/B/C → deploy checklist → live URL + sample SMS/email bubbles → Hosting $99/mo Stripe.
+6. Floating "See SMS / email journey" shows first-touch → preview → soft claim → bump (RJP/Robert/Ontario).
+
+Reset demo in browser console: TFDemoRJP.reset()
