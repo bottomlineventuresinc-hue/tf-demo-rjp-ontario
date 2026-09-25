@@ -44,7 +44,8 @@ Quality self-check PASS 2026-09-25 PT (CR 2026-09-25b rebuild). Same URL. Re-fro
 
 ## Change request 2026-09-25c (coverage)
 CEO change request 2026-09-25c. Coverage towns chosen by the builder were removed. The page now names only
-the home city (Ontario) plus areas the packet itself lists. Packet line: "Coverage: Ontario / Inland Empire / Upland / Fontana area".
-Extra areas kept from the packet: Upland, Fontana. Region label: Inland Empire (plain description, from the packet).
+the home city (Ontario) plus areas the packet itself lists. Packet line: "Coverage: Ontario / Inland Empire".
+Extra areas kept from the packet: none. Region label: Inland Empire (plain description, from the packet).
 Sample-job locations, coverage copy, the outside-the-city answer, demo lede and outreach line all use the home city only.
+Follow-up 2026-09-25 PT: Scout confirmed W1-W10 packet Coverage lines were inferred from location, not sourced. Original packet line "Ontario / Inland Empire / Upland / Fontana area" reduced to the home city only.
 Re-rendered through the same generator; republished to the same repo with a normal commit. Re-frozen 2026-09-25 PT.
