@@ -57,7 +57,7 @@
       apply: function () {
         if (heroLede) {
           heroLede.textContent =
-            'Kitchen and bathroom remodels, room additions, and whole-home remodels. Across Ontario and the Inland Empire. Robert looks at the job first and puts the price in writing.';
+            'Kitchen and bathroom remodels, room additions, and whole-home remodels in Ontario. Robert looks at the job first and puts the price in writing.';
         }
       }
     },
