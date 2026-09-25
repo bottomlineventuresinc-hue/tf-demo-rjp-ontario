@@ -1,4 +1,4 @@
-/* Template Factory - RJP live demo journey.
+/* Template Factory - RJP General Contracting live demo journey.
    Client-side simulate only. No real AI, SMS, or backend. */
 (function () {
   'use strict';
@@ -57,7 +57,7 @@
       apply: function () {
         if (heroLede) {
           heroLede.textContent =
-            'Kitchen remodel, bathroom remodel, room additions, and whole-home remodel across Ontario and the Inland Empire. Fixed itemised quotes before we start, Robert as your named lead on site, and a twelve-month workmanship guarantee when we leave.';
+            'Kitchen and bathroom remodels, room additions, and whole-home remodels. Across Ontario and the Inland Empire. Robert looks at the job first and puts the price in writing.';
         }
       }
     },
@@ -73,7 +73,7 @@
       id: 'service',
       apply: function () {
         if (serviceFirst) {
-          serviceFirst.textContent = 'Kitchen remodel (written programme)';
+          serviceFirst.textContent = 'Kitchen remodel (written price)';
         }
       }
     }
@@ -85,9 +85,9 @@
     /* mode: draft | updated */
     if (!barSub) return;
     if (mode === 'updated') {
-      barSub.textContent = 'Draft updated. More changes? Or claim it.';
+      barSub.textContent = 'Draft for Robert at RJP General Contracting. Claim it, preview the rest of the journey, or request a change.';
     } else {
-      barSub.textContent = 'Draft for Robert at RJP. Claim it, preview the rest of the journey, or request a change.';
+      barSub.textContent = 'Draft for Robert at RJP General Contracting. Claim it, preview the rest of the journey, or request a change.';
     }
   }
 
@@ -158,7 +158,7 @@
       var delay = 2500 + Math.floor(Math.random() * 1500);
       runSpinner(
         'Working on updates to your site…',
-        'Updating the draft for RJP. Hang tight.',
+        'Updating the draft for RJP General Contracting. Hang tight.',
         delay,
         function () {
           var editId = applyNextEdit();
